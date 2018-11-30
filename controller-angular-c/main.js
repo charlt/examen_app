@@ -65,7 +65,7 @@ app.controller('mainController', function($scope, $http) {
             //console.log('comienza chequeo de datos'+JSON.stringify(array_reglas_name[i]))
             
          }
-         console.log('ete es el bueno'+JSON.stringify(arreglo_imprimir))
+         console.log(JSON.stringify(arreglo_imprimir))
     }
 
     $scope.add = function(){
