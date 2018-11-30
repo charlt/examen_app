@@ -1,0 +1,9 @@
+Examen
+
+EL sistema esta hecho en nodejs, ya tiene las dependencias de node_modules.
+
+Solo es cuestion de correr el npm start, nodemon index.js o node index.js.
+
+MI idea era tambien insertar en registros de mongodb, pero por el tiempo no pude.
+
+Gracias, espero su retroalimentación.

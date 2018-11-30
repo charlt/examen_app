@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+
+    <title>Examen app</title>
+    <!-- Bootstrap core CSS -->
+    <link href="public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js">
+    </script>
+    <!-- Custom fonts for this template -->
+    <link href="public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="public/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="public/css/freelancer.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var eliminados=[];
+        var json = [
+            {
+                "name": "accepted",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "after",
+                "arguments": [
+                    "date"
+                ]
+            },
+            {
+                "name": "after_or_equal",
+                "arguments": [
+                    "date"
+                ]
+            },
+            {
+                "name": "alpha",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "alpha_dash",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "alpha_num",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "between",
+                "arguments": [
+                    "min",
+                    "max"
+                ]
+            },
+            {
+                "name": "unique",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "email",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "numeric",
+                "arguments": [
+
+                ]
+            },
+            {
+                "name": "min",
+                "arguments": [
+                    "value"
+                ]
+            },
+            {
+                "name": "in",
+                "arguments": [
+                    "value"
+                ]
+            }
+        ]
+        var remover = -1;
+        var remover_regla=-1
+        var contadorReglas = 0;
+        function parametros(valor, contadorReglas) {
+            var inputs = ""
+            json.forEach(function (element) {
+                if (element.name == valor) {
+                    element.arguments.forEach(function (args) {
+                        inputs += '<div class="col-md-3"><b>' + args + '</b><input type="text" class="form-control num'+contadorReglas+'" placeholder="' + args + '" name="' + args + '" ></div>'
+                    })
+                }
+            })
+
+            $("#reglanumero" + contadorReglas).append(inputs+"<div class='col-md-2'><br><i data-toggle='modal'  data-target='#removerregla'  onclick='remover_regla="+contadorReglas+"' class='far fa-trash-alt btn'></i></div>");
+        }
+        function verifica(contador) {
+
+            var elemento = "<div class='row' id='reglanumero" + contadorReglas + "'><div class='col-md-4 text-center' >" +
+                "<b>Selecciona una regla</b><select onchange='parametros(this.value," + contadorReglas +")' class='form-control numero"+contador+"' id='select"+contadorReglas+"'><option value=-1>Selecciona...</option>"
+            var elementos = ""
+            json.forEach(function (element) {
+                elementos = elementos + "<option value='" + String(element.name) + "'>" + String(element.name) + "</option>"
+            });
+            elemento += elementos + "</select></div></div>"
+            $("#contador" + contador).append(elemento)
+
+            contadorReglas ++;
+        }
+        function eliminar() {
+            $("#row" + remover).remove();
+            $('#exampleModalCenter').modal('hide');
+            
+        }
+        function eliminar_regla() {
+            $("#reglanumero" + remover_regla).remove();
+            $('#removerregla').modal('hide');
+            eliminados.push(remover_regla)
+            
+        }
+    </script>
+</head>
+
+<body id="page-top" ng-app="inicio" ng-controller="mainController">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+        <div class="container">
+
+            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Examen</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container">
+            <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
+            <h1 class="text-uppercase mb-0">Examen APP</h1>
+            <hr class="star-light">
+            <h2 class="font-weight-light mb-0">Ing. Charly Iván Bernabe Bernabe</h2>
+        </div>
+    </header>
+    <!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+-->
+
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="text-center text-uppercase text-secondary mb-0">Examen</h2>
+            <hr class="star-dark mb-5">
+            <div class="row jumbotron">
+                <div class="col-md-12 text-right">
+                    <i class="fas fa-plus-square btn" ng-click="add()" style="font-size:30px"></i>
+                    <input type="button" class="btn btn-info" value="Guardar" ng-click="guardar()">
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <thead>
+                            <tr class="text-center">
+                                <th style="width: 30%;font-size: 24px">
+                                    Nombre
+                                </th>
+                                <th style="width:10%;font-size: 24px">
+                                    Requerido
+                                </th>
+                                <th style="width:60%;font-size: 24px">
+                                    Reglas
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenedor">
+
+
+                        </tbody>
+                    </table>
+                    
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+        <!-- Modal-seguro -->
+        <div class="modal fade" id="removerregla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar regla</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de remover este elemento?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="eliminar_regla()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal-seguro -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de remover este elemento?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="eliminar()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="public/vendor/jquery/jquery.min.js"></script>
+    <script src="public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="public/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="public/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="public/js/jqBootstrapValidation.js"></script>
+    <script src="public/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="public/js/freelancer.min.js"></script>
+    <script src="angular/main.js"></script>
+
+</body>
+
+</html>
