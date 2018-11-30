@@ -1,5 +1,4 @@
 'use strict'
-//var Empresa = require('../models/empresas');
 
 var router = require('express').Router();
 
